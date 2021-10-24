@@ -3,7 +3,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = 3000;
 const mysql = require('mysql');
-const { parse } = require('path/posix');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -31,6 +30,11 @@ function exConsultaSQL(sqlQry, res){
 const router = express.Router();
 router.get('/', (req, res) => res.json({message: 'Agora vai, esta funcionando!'}));
 app.use('/', router);
+app.use('/alunos', router.get);
+app.use('/alunos/:id?', router.get);
+app.use('/alunos/:id', router.delete);
+app.use('/alunos', router.post);
+app.use('/alunos/:id', router.patch);
 
 router.get('/alunos', (req, res) =>{
   exConsultaSQL('SELECT * FROM dados_alunos', res);

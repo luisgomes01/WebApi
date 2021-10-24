@@ -9,6 +9,7 @@
     "express-generator": "^4.16.1",
     "module-exports": "^1.0.0",
     "mysql": "^2.18.1",
+    "nodemon": "^2.0.14",
     "sequelize": "^6.7.0"
   },
   "scripts": {

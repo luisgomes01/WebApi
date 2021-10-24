@@ -3,7 +3,7 @@ const connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: 'OlaMundo',
+    password: '',
     database: 'alunos'
 });
 
@@ -14,7 +14,7 @@ connection.connect(function(err){
 
 function criarTabela(conn){
     const sql = "CREATE TABLE IF NOT EXISTS dados_alunos (" +
-                "Id int NOT NULL AUTO_INCREMENT,"+
+                "ID int NOT NULL AUTO_INCREMENT,"+
                 "Nome varchar(150) NOT NULL,"+
                 "CPF char (11) NOTNULL,"+
                 ");";
