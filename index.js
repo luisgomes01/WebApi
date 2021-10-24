@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = 3000;
 const mysql = require('mysql');
+const { parse } = require('path/posix');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -12,7 +13,7 @@ function exConsultaSQL(sqlQry, res){
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: '',
+    password: 'OlaMundo',
     database: 'alunos'
   });
 
@@ -32,8 +33,33 @@ router.get('/', (req, res) => res.json({message: 'Agora vai, esta funcionando!'}
 app.use('/', router);
 
 router.get('/alunos', (req, res) =>{
-  exConsultaSQL('SELECT * FROM Dados_Alunos', res);
+  exConsultaSQL('SELECT * FROM dados_alunos', res);
 });
 
+router.get('/alunos/:id?', (req, res) => {
+  let filter = '';
+  if (req.params.id) filter = ' WHERE ID = ' + parseInt(req.params.id);
+  exConsultaSQL('SELECT * FROM dados_alunos' + filter, res);
+})
+
+router.delete('/alunos/:id', (req, res) => {
+  exConsultaSQL('DELETE FROM dados_alunos WHERE Id=' + parseInt(req.params.id), res);
+});
+
+router.post('/alunos', (req, res) => {
+  const nome = req.body.nome.substring (0, 150);
+  const cpf = req.body.cpf.substring(0, 11);
+  exConsultaSQL(`INSERT INTO dados_alunos (Nome, CPF) VALUES ('${nome}', '${cpf}')`, res);
+});
+
+router.patch('/alunos/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const nome = req.body.nome.substring (0, 150);
+  const cpf = req.body.cpf.substring(0, 11);
+  exConsultaSQL(`UPDATE dados_alunos SET Nome = '${nome}', CPF = '${cpf}' WHERE ID = ${id}`, res);
+});
+
+
+//inicia o servidor
 app.listen(port);
 console.log("Funcionou!");
