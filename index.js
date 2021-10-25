@@ -51,14 +51,14 @@ router.delete('/alunos/:id', (req, res) => {
 });
 
 router.post('/alunos', (req, res) => {
-  const nome = req.body.nome.substring (0, 150);
+  const nome = req.body.nome.substring(0, 150);
   const cpf = req.body.cpf.substring(0, 11);
   exConsultaSQL(`INSERT INTO dados_alunos (Nome, CPF) VALUES ('${nome}', '${cpf}')`, res);
 });
 
 router.patch('/alunos/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  const nome = req.body.nome.substring (0, 150);
+  const nome = req.body.nome.substring(0, 150);
   const cpf = req.body.cpf.substring(0, 11);
   exConsultaSQL(`UPDATE dados_alunos SET Nome = '${nome}', CPF = '${cpf}' WHERE ID = ${id}`, res);
 });
