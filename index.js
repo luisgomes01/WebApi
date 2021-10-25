@@ -50,7 +50,7 @@ router.delete('/alunos/:id', (req, res) => {
   exConsultaSQL('DELETE FROM dados_alunos WHERE Id=' + parseInt(req.params.id), res);
 });
 
-app.post('/alunos', (req, res) => {
+router.post('/alunos', (req, res) => {
   const nome = req.body.nome.substring(0, 150);
   const cpf = req.body.cpf.substring(0, 11);
   exConsultaSQL(`INSERT INTO dados_alunos (Nome, CPF) VALUES ('${nome}', '${cpf}')`, res);
