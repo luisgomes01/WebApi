@@ -12,7 +12,7 @@ function exConsultaSQL(sqlQry, res){
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: '',
+    password: 'OlaMundo',
     database: 'alunos'
   });
 
@@ -53,7 +53,7 @@ router.delete('/alunos/:id', (req, res) => {
 router.post('/alunos', (req, res) => {
   const nome = req.body.nome.substring(0, 150);
   const cpf = req.body.cpf.substring(0, 11);
-  exConsultaSQL(`INSERT INTO dados_alunos (Nome, CPF) VALUES ('${nome}', '${cpf}')`, res);
+  exConsultaSQL(`INSERT INTO dados_alunos (Nome, CPF) VALUES ('${nome}', '${cpf}')`, res)
 });
 
 router.patch('/alunos/:id', (req, res) => {
