@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const port = 3000;
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -12,7 +12,7 @@ function exConsultaSQL(sqlQry, res){
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: 'OlaMundo',
+    password: '',
     database: 'alunos'
   });
 

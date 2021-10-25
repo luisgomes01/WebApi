@@ -1,9 +1,9 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const connection = mysql.createConnection({
-    host: 'localhost',
+    host: '127.0.0.1',
     port: 3306,
     user: 'root',
-    password: '',
+    password: 'OlaMundo',
     database: 'alunos'
 });
 
@@ -16,7 +16,7 @@ function criarTabela(conn){
     const sql = "CREATE TABLE IF NOT EXISTS dados_alunos (" +
                 "ID int NOT NULL AUTO_INCREMENT,"+
                 "Nome varchar(150) NOT NULL,"+
-                "CPF char (11) NOTNULL,"+
+                "CPF char (11) NOT NULL"+
                 ");";
 
     conn.query(sql, function (error, results, fields){
